@@ -8,7 +8,7 @@ using Telegram.Bot;
 namespace StudentAssistantTelegramBot
 {
     // для опознования, в каком меню находится пользователь
-    public enum LevelOfCode { MAIN_MENU = 0, STUDY_MENU, FAN_MENU };
+    public enum LevelOfCode { MAIN_MENU = 0, STUDY_MENU, FAN_MENU, FAN_JANR };
 
     public class Students
     {
