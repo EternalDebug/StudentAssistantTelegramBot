@@ -46,12 +46,13 @@ namespace StudentAssistantTelegramBot
                 stud.users_loc = LevelOfCode.MAIN_MENU;
             }
             /* =================================== MAIN_MENU =================================== */
-            else if (message == "/fan" && stud.users_loc == LevelOfCode.MAIN_MENU)
+            else if (message == "/fan" && (stud.users_loc == LevelOfCode.MAIN_MENU || stud.users_loc == LevelOfCode.FAN_JANR))
             {
                 answer = $"Ты в меню развлечений.\n" +
                     $"Здесь я могу:\n" +
                     $"• рассказать тебе случайный анекдот (команда /joke)\n" +
-                    $"• порекомендовать музыку (команда /music)\n\n" +
+                    $"• порекомендовать музыку (команда /music)\n" +
+                    $"• порекомендовать музыку по жанру (команда /jmusic)\n\n" +
                     $"Вернуться в главное меню - команда /menu";
                 stud.users_loc = LevelOfCode.FAN_MENU;
             }
@@ -67,11 +68,30 @@ namespace StudentAssistantTelegramBot
             /* =================================== FAN_MENU =================================== */
             else if (message == "/joke" && stud.users_loc == LevelOfCode.FAN_MENU)
             {
-                answer = "шутка";
+                answer = Secondary.RandMilJoke();
             }
             else if (message == "/music" && stud.users_loc == LevelOfCode.FAN_MENU)
             {
-                answer = "музыка";
+                answer = Secondary.RandMusic();
+            }
+            else if (message == "/jmusic" && stud.users_loc == LevelOfCode.FAN_MENU)
+            {
+                answer = $"Хорошо, назови жанр (команда /жанр Название_Жанра). Но учти, я знаю пока только рок, поп, альтернативу и классическую музыку...\n" +
+                    $"Вернуться в меню развлечений- команда /fan";
+                stud.users_loc = LevelOfCode.FAN_JANR;
+            }
+            else if (message.Contains("/жанр") && stud.users_loc == LevelOfCode.FAN_JANR)
+            {
+                string j = "";
+                if (message.ToLower().Contains("класси"))
+                    j = "классическая";
+                else if (message.ToLower().Contains("рок"))
+                    j = "рок";
+                else if (message.ToLower().Contains("поп"))
+                    j = "поп";
+                else if (message.ToLower().Contains("альтерн"))
+                    j = "альтернатива";
+                answer = Secondary.JanrRandMusic(j);
             }
             /* =================================== STUDY_MENU =================================== */
             else if (message == "/makeschedule" && stud.users_loc == LevelOfCode.STUDY_MENU)
