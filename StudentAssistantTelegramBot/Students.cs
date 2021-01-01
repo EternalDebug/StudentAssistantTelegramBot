@@ -8,7 +8,7 @@ using Telegram.Bot;
 namespace StudentAssistantTelegramBot
 {
     // для опознования, в каком меню находится пользователь
-    public enum LevelOfCode { MAIN_MENU = 0, STUDY_MENU, FAN_MENU, FAN_JANR };
+    public enum LevelOfCode { MAIN_MENU = 0, STUDY_MENU, FAN_MENU, FAN_JANR, Question_1 };
 
     public class Students
     {
@@ -94,11 +94,16 @@ namespace StudentAssistantTelegramBot
     {
         public long student_id; // id пользователя
         public LevelOfCode users_loc; // уровень вложенности кода для пользователя
+        public Dictionary<string, DateTime[]> Shedule; //Расписание, составленное для пользователя
+
+        public LevelOfCode prev_loc; // Прошлый уровень вложенности. Костыль для сендера
 
         public Student(long id, LevelOfCode loc)
         {
             this.student_id = id;
             this.users_loc = loc;
+            this.Shedule = new Dictionary<string, DateTime[]>();
+            this.prev_loc = loc; 
         }
     }
 }
