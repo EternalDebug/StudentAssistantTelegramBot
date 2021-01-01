@@ -2,25 +2,38 @@
 using System.Collections.Generic;
 using System.Text;
 using Telegram.Bot;
+using System.Threading;
 
 namespace StudentAssistantTelegramBot
 {
     class Program
     {
         // бот
-        public static readonly TelegramBotClient Bot = new TelegramBotClient("1373599681:AAFoHfRgljVyPQvADGvcc2_-rrPIeo6CQV4");
+        public static readonly TelegramBotClient Bot = new TelegramBotClient("1490665480:AAEF9wmeDVeFx1hvs3kiOZ_4mxn82bePmQo");
 
         // пользователи
         public static Students students = new Students();
 
         static void Main()
         {
+            Thread BotMain = new Thread(ThreadMain);
+            Thread WarnThread = new Thread(Shedule_Sender.Bot_SendWarn);
+
+            BotMain.Start();
+            WarnThread.Start();
+        }
+
+
+        static void ThreadMain()
+        {
             string path = "students.txt";
             students.ReadStudentsList(path);
+            Shedule_Sender.SetTestShed(ref students, 790754149);
             Console.WriteLine("\nБот включён. Для выключения нажмите любую кнопку.\n");
 
             Bot.OnMessage += OnMessage.Bot_OnMessage;
-            
+
+
             Bot.StartReceiving();
             Console.ReadKey();
             Bot.StopReceiving();
@@ -30,12 +43,3 @@ namespace StudentAssistantTelegramBot
         }
     }
 }
-
-/*DateTime a = System.DateTime.Now;
-            var dow = a.DayOfWeek;
-            Console.WriteLine(dow.ToString());
-            Console.WriteLine(dow.ToString().ToLower() == "monday");
-            Dictionary<DayOfWeek, (int a, int end)> freeTime = new Dictionary<DayOfWeek, (int a, int end)>();
-            freeTime.Add(DayOfWeek.ПН, (1, 2));
-            foreach (var aa in freeTime.Values)
-                Console.WriteLine(aa.a + aa.end);*/
