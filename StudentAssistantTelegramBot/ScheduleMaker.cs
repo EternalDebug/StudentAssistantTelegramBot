@@ -6,10 +6,10 @@ using Telegram.Bot;
 
 namespace StudentAssistantTelegramBot
 {
-    public enum DayOfWeek { ПН, ВТ, СР, ЧТ, ПТ, СБ, ВС };
+    //public enum DayOfWeek { ПН, ВТ, СР, ЧТ, ПТ, СБ, ВС };
 
     // класс для составления рассписания студенту
-    public class ScheduleMaker
+    /*public class ScheduleMaker
     {
         Telegram.Bot.Args.MessageEventArgs e;
         int questionCnt;
@@ -20,5 +20,5 @@ namespace StudentAssistantTelegramBot
         {
 
         }
-    }
+    }*/
 }
