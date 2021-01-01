@@ -21,7 +21,7 @@ namespace StudentAssistantTelegramBot
             else
                 return;
 
-            Console.Write($"{DateTime.Now} | from: {e.Message.From.Username} | text: {message} | level before: {stud.users_loc}");
+            Console.Write($"{DateTime.Now} | from:{e.Message.From.Id} {e.Message.From.Username} | text: {message} | level before: {stud.users_loc}");
 
             /* =================================== РАБОТАЮТ ВЕЗДЕ =================================== */
             if (message == "/start")
@@ -102,7 +102,16 @@ namespace StudentAssistantTelegramBot
             {
                 answer = "советов нет, но вы держитесь";
             }
-            /* ================================================================================== */
+            /* ==================================== SheduleSender: Question_1 ================================== */
+            else if (stud.users_loc == LevelOfCode.Question_1)
+            {
+                if (message.ToLower().Contains("да") || message.ToLower().Contains("угу") || message.ToLower().Contains("ага"))
+                    answer = "Хорошо, так держать!";//Добавить счётчик положительного рейтинга
+                else if (message.ToLower().Contains("не") || message.ToLower().Contains("кыш") || message.ToLower().Contains("брысь"))
+                    answer = "Ну хорошо. Только не забывай, что бесконечный отдых быстро лечится в армейке...";
+                else answer = "Увы, не могу разобрать что вы говорите...";
+                stud.users_loc = stud.prev_loc;
+            }
 
             Console.WriteLine($" | level after: {stud.users_loc}");
 
