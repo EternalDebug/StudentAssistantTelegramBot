@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
@@ -8,7 +8,7 @@ using Telegram.Bot;
 namespace StudentAssistantTelegramBot
 {
     // для опознования, в каком меню находится пользователь
-    public enum LevelOfCode { MAIN_MENU = 0, STUDY_MENU, FAN_MENU, FAN_JANR, Question_1 };
+    public enum LevelOfCode { MAIN_MENU = 0, STUDY_MENU, FUN_MENU, FUN_JANR, Question_1 };
 
     public class Students
     {
