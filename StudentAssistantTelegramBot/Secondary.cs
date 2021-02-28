@@ -16,7 +16,7 @@ namespace StudentAssistantTelegramBot
         {
             
             string Joke = "_Joke";
-            try
+            /*try
             {
                 string path = "MilJoke.txt";
                 Console.WriteLine();
@@ -34,10 +34,37 @@ namespace StudentAssistantTelegramBot
             catch (FileNotFoundException exc)
             {
                 Console.WriteLine(exc.Message);
-            }
+            }*/
+            Random rnd = new Random();
+            Joke = Program.MilJokes[rnd.Next(0, Program.MilJokes.Length - 1)];
 
 
             return Joke;
+        }
+
+        /// <summary>
+        /// Считывает содержимое текстового файла. Принимает название файла
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static string[] PrmitiveFileReader(string path)
+        {
+            string[] res = new string[0];
+            try
+            {
+                Console.WriteLine();
+                Console.WriteLine($"Идёт чтение из файла: {path}");
+                res = File.ReadAllLines(path).ToArray();
+                if (res.Length == 0)
+                    Console.WriteLine($"Файл {path} пуст.");
+                Console.WriteLine($"Чтение из {path} прошло успешно. Считано {res.Length} строк");
+            }
+            catch (FileNotFoundException exc)
+            {
+                Console.WriteLine(exc.Message);
+            }
+
+            return res;
         }
 
         /// <summary>
@@ -46,7 +73,7 @@ namespace StudentAssistantTelegramBot
         /// <param name="path"></param>
         /// <param name="janr"></param>
         /// <returns></returns>
-        protected static string[] GetMusic(string path, string janr)
+        public static string[] GetMusic(string path, string janr)
         {
             string[] mres = new string[0];
             try
@@ -124,13 +151,14 @@ namespace StudentAssistantTelegramBot
         /// </summary>
         public static string RandMusic()
         {
-            string path = "Music.txt";
+            /*string path = "Music.txt";
             string[] mus = GetMusic(path, "");
             Random rnd = new Random();
 
-            return  mus[rnd.Next(0, mus.Length - 1)];
+            return  mus[rnd.Next(0, mus.Length - 1)];*/
 
-
+            Random rnd = new Random();
+            return Program.Allmus[rnd.Next(0, Program.Allmus.Length - 1)];
         }
 
         /// <summary>
@@ -139,13 +167,29 @@ namespace StudentAssistantTelegramBot
         /// <param name="janr"></param>
         public static string JanrRandMusic(string janr)
         {
-            string path = "Music.txt";
+            /*string path = "Music.txt";
             string j1 = "*";
             j1 += janr.ToLower();
             string[] mus = GetMusic(path, j1);
             Random rnd = new Random();
 
+            return mus[rnd.Next(0, mus.Length - 1)];*/
+
+            string[] mus = new string[0];
+            if (janr == "классическая")
+                mus = Program.Classicmus;
+            if (janr == "рок")
+                mus = Program.Rockmus;
+            if (janr == "поп")
+                mus = Program.Popmus;
+            if (janr == "альтернатива")
+                mus = Program.Altmus;
+
+            Random rnd = new Random();
+
             return mus[rnd.Next(0, mus.Length - 1)];
+
         }
     }
 }
+
