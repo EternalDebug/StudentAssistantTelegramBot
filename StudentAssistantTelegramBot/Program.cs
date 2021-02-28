@@ -9,7 +9,7 @@ namespace StudentAssistantTelegramBot
     class Program
     {
         // бот
-        public static readonly TelegramBotClient Bot = new TelegramBotClient("1490665480:AAEF9wmeDVeFx1hvs3kiOZ_4mxn82bePmQo");
+        public static readonly TelegramBotClient Bot = new TelegramBotClient("Token"); //TestToken was here!
 
         // пользователи
         public static Students students = new Students();
